@@ -43,6 +43,8 @@ public class SampleClass
 	{
 		return str;
 	}
+	// Agrego esta anotación solamente para mostrarla en la lista de anotaciones
+	@Deprecated
 	public void setNumbers(ArrayList<Integer> numbers)
 	{
 		this.numbers = numbers;

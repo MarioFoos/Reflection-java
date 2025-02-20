@@ -1,5 +1,6 @@
 package com.diardon;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -11,9 +12,9 @@ public class ReflectionApp
 	public static void main(String[] args)
 	{
 		inspectClass();
-		invokeMethods();
-		writeMembers();
-		loadClass();
+		//invokeMethods();
+		//writeMembers();
+		//loadClass();
 		
 	}
 	public static void loadClass()
@@ -122,12 +123,42 @@ public class ReflectionApp
 		{
 		    System.out.println(method.getName());
 		}
-
+	
 		System.out.println();
 		System.out.println("Variables:");
 		for(Field field : klass.getDeclaredFields())
 		{
 		    System.out.println(field.getName() + ": " + field.getType());
 		}
+	    // Verificar métodos anotados
+		System.out.println();
+		System.out.println("Métodos anotados:");
+	    for(Method metodo : klass.getDeclaredMethods())
+	    {
+	    	Annotation[] annotations = metodo.getAnnotations();
+	    	if(annotations.length > 0)
+	    	{
+			    System.out.println("Anotaciones del método: " + metodo.getName());
+			    for(Annotation note : annotations)
+			    {
+			    	System.out.println(note.toString());
+			    }
+	    	}
+	    }
+	    // Verificar campos anotados
+		System.out.println();
+		System.out.println("Variables anotadas:");
+	    for (Field campo : klass.getDeclaredFields())
+	    {
+	    	Annotation[] annotations = campo.getAnnotations();
+	    	if(annotations.length > 0)
+	    	{
+			    System.out.println("Anotaciones del campo: " + campo.getName());
+			    for(Annotation note : annotations)
+			    {
+			    	System.out.println(note.toString());
+			    }
+	    	}
+	    }
 	}
 }
